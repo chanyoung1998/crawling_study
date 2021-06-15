@@ -1,16 +1,17 @@
 import requests
 from bs4 import BeautifulSoup
-import json
+
+
 def crawl(url):
     data = requests.get(url)
-    print(data)
+    #print(data)
     return data.content
 
 def getStockInfo(tr):
     tds = tr.findAll("td")
     rank = tds[0].text
     aTag = tds[1].find("a")
-    href = aTag["href"]
+    href = "https://finance.naver.com" + aTag["href"]
     name = aTag.text
     nowprice = tds[2].text
     totalPrice = tds[6].text
@@ -48,12 +49,3 @@ def getSiseMarketSum(sosok,page):
     list = parse(pageString,sosok)
     return list
 
-result = []
-for page in range(1,2):
-    list = getSiseMarketSum(0,page) # 0코스피,1코스닥
-    result += list
-
-print(result)
-
-file = open("./kospi.json","w+")
-file.write(json.dumps(result))
