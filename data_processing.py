@@ -37,15 +37,19 @@ def getSpecificInfo(ranking):
 
 
 df = pd.read_csv("./data/kospi.csv")
-new_columns = {"종합정보","시세","차트","투자자별 매매동향","뉴스,공시","종목분석","종목토론실","전자공시","공매도현황"}
+new_columns = {"종합정보","시세","차트","투자자별 매매동향","뉴스·공시","종목분석","종목토론실","전자공시","공매도현황"}
 new_df = pd.DataFrame(columns=new_columns)
+print(new_df)
 for i in range(len(df)):
     list = getSpecificInfo(i)
-    temp = []
+    #temp = []
+    print(list)
     for j in range(len(list)):
         href = list[j]['href']
-        temp.append(href)
-    new_df.loc[i,new_columns] = temp
+        new_df.loc[i,list[j]['tab_name']] = href
+        #temp.append(href)
+    #new_df.loc[i,new_columns] = temp
 
 result = pd.concat([df,new_df],axis=1)
-result.to_csv("./kospi_with_newtab.csv",sep=',',na_rep='NaN',columns=result.columns,index=True)
+print(result.columns)
+result.to_csv("./kospi_with_newtab.csv",sep=',',na_rep='NaN',columns=result.columns,index=True,encoding='utf-8')
