@@ -17,7 +17,7 @@ def getStockInfo(tr):
     totalPrice = tds[6].text
     volume = tds[9].text
     #print(tds)
-    return {"rank":rank,"name":name,"href":href,"code":href[20:],"nowPrice":nowprice,"totalPrice":totalPrice,"volume":volume}
+    return {"rank":rank,"name":name,"href":href,"nowPrice":nowprice,"marketcap":totalPrice,"volume":volume}
 
 def parse(pageString,sosok):
     bsObj = BeautifulSoup(pageString,"html.parser")
