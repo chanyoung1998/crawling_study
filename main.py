@@ -3,14 +3,16 @@ import tools
 import pandas as pd
 
 result = []
-for page in range(2,3):
+for page in range(1,11):
     list = getSiseMarketSum(0,page) # 0코스피,1코스닥
     result += list
 
 tools.makejson("./data/kospi.json",result)
 tools.jsontocsv("./data/kospi.json","./data/kospi.csv")
 
-new_columns = {"종합정보","시세","차트","투자자별 매매동향","뉴스·공시","종목분석","종목토론실","전자공시","공매도현황"}
+
+
+'''new_columns = {"종합정보","시세","차트","투자자별 매매동향","뉴스·공시","종목분석","종목토론실","전자공시","공매도현황"}
 new_df = pd.DataFrame(columns=new_columns)
 
 
@@ -28,4 +30,4 @@ result.to_csv("./data/kospi_with_newtab.csv",sep=',',na_rep='NaN',columns=result
 
 import stock
 print(result.columns)
-
+'''
